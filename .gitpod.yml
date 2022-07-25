@@ -1,0 +1,16 @@
+tasks:
+    - name: Install workspace dependencies
+      command: |
+        pip install neural-compressor
+        pip install -i https://test.pypi.org/simple/ neural-compressor-full
+        conda install neural-compressor -c conda-forge -c intel       
+        pip install conda
+        pip install onnx==1.9.0 onnxruntime==1.10.0 onnxruntime-extensions
+        wget https://github.com/onnx/models/raw/main/vision/classification/resnet/model/resnet50-v1-12.onnx        
+        sudo apt-get update
+        sudo apt-get install ffmpeg libsm6 libxext6  -y
+        pip install tensorflow
+        export PROTOCOL_BUFFERS_PYTHON_IMPLEMENTATION=python
+        sudo iptables -t nat -A OUTPUT -p tcp --dport 5000 -j DNAT --to-destination 10.0.5.2:5000
+        inc_bench --allow-insecure-connections
+
